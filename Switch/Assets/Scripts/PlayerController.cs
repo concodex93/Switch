@@ -17,8 +17,23 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        playerRigidBody.velocity = new Vector2(playerSpeed, playerRigidBody.position.y);
+        Run();
+        Jump();
 
 	}
+
+    private void Run(){
+        
+        playerRigidBody.velocity = new Vector2(playerSpeed, playerRigidBody.velocity.y);
+    }
+
+    private void Jump(){
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)){
+            
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, playerJumpHieght);
+
+        }
+    }
+
 }
