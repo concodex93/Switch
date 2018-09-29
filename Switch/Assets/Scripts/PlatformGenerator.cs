@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class PlatformGenerator : MonoBehaviour {
     
 
     public GameObject platformGenerationPoint;
     public GameObject platform;
+    public ObjectPooler objectPool;
 
     private float platformWidth;
 
@@ -20,6 +21,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        GeneratePlatforms();
 
 	}
 
@@ -27,7 +29,12 @@ public class NewBehaviourScript : MonoBehaviour {
 
         if (transform.position.x < platformGenerationPoint.transform.position.x){
 
-            transform.position = new Vector3(transform.position.x + GetPlatformWidth(), transform.position.y);
+            transform.position = new Vector3(transform.position.x + GetPlatformWidth(), transform.position.y, transform.position.z);
+
+            GameObject newPlatform = objectPool.GetPooledObject();
+            newPlatform.transform.position = transform.position;
+            newPlatform.transform.rotation = transform.rotation;
+            newPlatform.SetActive(true);
         }
     }
 
