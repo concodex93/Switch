@@ -27,9 +27,7 @@ public class ObjectPooler : MonoBehaviour {
 
         for (int i = 0; i < pooledAmount; i ++){
 
-            GameObject mGameObject = Instantiate(pooledObject);
-            mGameObject.SetActive(false);
-            pooledObjects.Add(mGameObject);
+            CreateAndAddPooledObjectToList();
 
         }
     }
@@ -38,16 +36,28 @@ public class ObjectPooler : MonoBehaviour {
 
         for (int i = 0; i < pooledObjects.Count; i ++){
 
-            if (!pooledObjects[i].activeInHierarchy){
+            if (pooledObjects[i].activeInHierarchy == false){
+
+                Debug.Log("Found inactive platform");
 
                 return pooledObjects[i];
             }
 
         }
 
+        // Create new object and add to list
+
+        return CreateAndAddPooledObjectToList();
+    }
+
+
+    private GameObject CreateAndAddPooledObjectToList(){
+
         GameObject mGameObject = Instantiate(pooledObject);
         mGameObject.SetActive(false);
         pooledObjects.Add(mGameObject);
+
+        Debug.Log("Create inactive platform");
 
         return mGameObject;
     }

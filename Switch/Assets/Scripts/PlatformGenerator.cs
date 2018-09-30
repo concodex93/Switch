@@ -13,9 +13,7 @@ public class PlatformGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-        platformGenerationPoint = GameObject.Find("PlatformGenerationPoint");
-		
+    		
 	}
 	
 	// Update is called once per frame

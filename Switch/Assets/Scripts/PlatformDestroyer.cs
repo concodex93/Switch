@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlatformDestroyer : MonoBehaviour {
 
-    public GameObject platformDestructionPoint;
+    private GameObject platformDestructionPoint;
 
 	// Use this for initialization
 	void Start () {
 
         platformDestructionPoint = GameObject.Find("PlatformDestructionPoint");
-
 	}
 	
 	// Update is called once per frame
@@ -23,8 +22,10 @@ public class PlatformDestroyer : MonoBehaviour {
     private void DestroyPlatform(){
         
         if (transform.position.x < platformDestructionPoint.transform.position.x){
+            
             gameObject.SetActive(false);
 
+            Debug.Log("Destroy");
         }
     }
 }
