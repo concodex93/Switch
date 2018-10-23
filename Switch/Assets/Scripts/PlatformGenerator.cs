@@ -9,6 +9,8 @@ public class PlatformGenerator : MonoBehaviour {
     public GameObject platform;
     public ObjectPooler objectPool;
 
+    public List<GameObject> platforms;
+
     private float platformWidth;
 
 	// Use this for initialization

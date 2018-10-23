@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D playerRigidBody;
-    public float playerSpeed;
+    private float currentSpeed = 2f;
+    private float targetSpeed = 35f;
+    private float rotationSpeed;
+    private float rotationCompensationValue = 5f;
     public float playerJumpHieght;
 
 	// Use this for initialization
@@ -18,13 +21,20 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Run();
+        Rotate();
+        AdjustPlayerRotation();
         Jump();
 
 	}
 
     private void Run(){
-        
-        playerRigidBody.velocity = new Vector2(playerSpeed, playerRigidBody.velocity.y);
+
+        if (currentSpeed < targetSpeed){
+
+            currentSpeed += Time.deltaTime/2;
+            playerRigidBody.velocity = new Vector2(currentSpeed, playerRigidBody.velocity.y);
+
+        }
     }
 
     private void Jump(){
@@ -34,6 +44,30 @@ public class PlayerController : MonoBehaviour {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, playerJumpHieght);
 
         }
+    }
+
+    private void Rotate(){
+        
+        rotationSpeed = currentSpeed / 2;
+        transform.Rotate(0, 0, -rotationSpeed);
+
+    }
+
+    private void AdjustPlayerRotation(){
+        
+        if (Input.GetKey(KeyCode.RightArrow) == true){
+
+            transform.Rotate(0, 0, -rotationCompensationValue);
+
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow) == true)
+        {
+            
+            transform.Rotate(0, 0, rotationCompensationValue);
+
+        }
+    
     }
 
 }
